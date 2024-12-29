@@ -1,44 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Iframe Page</title>
+  <title>Stick Merge</title>
+  <link rel="icon"
+    href="https://lh3.googleusercontent.com/u/0/drive-viewer/AK7aPaAuLv-x3K92Ye4uBqZiKhFr34KE70_Ofis1b9wqxbCmKl60Fb7ORFaKsqUqXLbbqpz9zkeLzbzvVVx9i_TUriIIHAHLEg=w1366-h643"
+    type="image/x-icon">
   <style>
-    body {
-      font-family: Arial, sans-serif;
+    body,
+    html {
       margin: 0;
       padding: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      background-color: #121212; /* Dark background */
-      color: #e0e0e0; /* Light text color */
-      height: 100vh;
-      justify-content: center;
+      height: 100%;
+      overflow: hidden;
     }
+
     iframe {
       width: 100%;
       height: 100%;
-      border: none;
+      border: 0;
     }
   </style>
 </head>
+
 <body>
-
-  <script>
-    // Retrieve the query parameter 'id' from the URL
-    const urlParams = new URLSearchParams(window.location.search);
-    const itemId = urlParams.get('id');
-
-    // If the 'id' is found, log it or use it to customize content
-    console.log("Clicked item ID:2", itemId);
-
-    // Insert the iframe
-    const iframe = document.createElement('iframe');
-    iframe.allowfullscreen = true;
-    iframe.src = "https://1v1.lol"; // Or any URL you want to display in the iframe
-    document.body.appendChild(iframe);
-  </script>
+  <iframe src="https://hiflorida.foxmoss.com" frameborder="0" allowfullscreen></iframe>
 </body>
+
 </html>
