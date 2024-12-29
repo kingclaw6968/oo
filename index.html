@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dark Mode Grid Layout</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: #121212; /* Dark background */
+      color: #e0e0e0; /* Light text color */
+    }
+    header {
+      width: 100%;
+      background-color: #1f1f1f; /* Darker header */
+      color: #ffffff;
+      text-align: center;
+      padding: 10px 0;
+      font-size: 24px;
+      font-weight: bold;
+      border-bottom: 2px solid #333;
+    }
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      padding: 20px;
+      max-width: 1200px;
+      width: 100%;
+      overflow: auto; /* Allow scroll if necessary */
+    }
+    .grid-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: #1e1e1e; /* Slightly lighter than the body */
+      padding: 10px;
+      border: 1px solid #333; /* Subtle border */
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Soft shadow */
+      transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
+    }
+    .grid-item:hover {
+      transform: scale(1.05); /* Slightly enlarge on hover */
+      box-shadow: 0 0 15px 2px rgba(255, 255, 255, 0.5); /* White glow effect */
+    }
+    .image-slot {
+      width: 100px;
+      height: 100px;
+      background-color: #2d2d2d; /* Dark placeholder color */
+      border-radius: 8px;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      transition: transform 0.3s ease; /* Smooth transition for image slot */
+    }
+    .image-slot img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* Ensure the image fits inside the slot */
+      transition: transform 0.3s ease; /* Smooth transition for image zoom */
+    }
+    .image-slot:hover img {
+      transform: scale(1.1); /* Zoom in the image slightly */
+    }
+    .caption {
+      font-size: 16px;
+      font-weight: bold;
+      color: #e0e0e0; /* Light text for captions */
+    }
+
+    /* Hide scrollbar for Chrome, Safari, and Opera */
+    .grid-container::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* Hide scrollbar for IE, Edge, and Firefox */
+    .grid-container {
+      -ms-overflow-style: none;  /* IE and Edge */
+      scrollbar-width: none;  /* Firefox */
+    }
+  </style>
+</head>
+<body>
+  <header>SKIBIDI</header>
+  <div class="grid-container">
+    <!-- Dynamically generate a large number of items with different images and names -->
+    <script>
+      const gridContainer = document.querySelector('.grid-container');
+      const items = [
+        { name: '1v1.lol', imageUrl: 'https://img.utdstc.com/icon/983/22a/98322a3b2be892eed31589906ffd949b68bcccc9a21ba562987965b5ec6bc6de:200', page: 'page1.html' },
+        { name: 'ArtClass', imageUrl: 'https://avatars.githubusercontent.com/u/116205545?s=280&v=4', page: 'page2.html' },
+        { name: 'Item 3', imageUrl: 'https://via.placeholder.com/100', page: 'page3.html' },
+        { name: 'Item 4', imageUrl: 'https://via.placeholder.com/100', page: 'page4.html' },
+        { name: 'Item 5', imageUrl: 'https://via.placeholder.com/100', page: 'page5.html' },
+        { name: 'Item 6', imageUrl: 'https://via.placeholder.com/100', page: 'page6.html' },
+        { name: 'Item 7', imageUrl: 'https://via.placeholder.com/100', page: 'page7.html' },
+        { name: 'Item 8', imageUrl: 'https://via.placeholder.com/100', page: 'page8.html' },
+        { name: 'Item 9', imageUrl: 'https://via.placeholder.com/100', page: 'page9.html' },
+        { name: 'Item 10', imageUrl: 'https://via.placeholder.com/100', page: 'page10.html' },
+        // Add more items with custom image URLs if needed
+      ];
+
+      items.forEach(item => {
+        const gridItem = document.createElement('div');
+        gridItem.className = 'grid-item';
+
+        const imageSlot = document.createElement('div');
+        imageSlot.className = 'image-slot';
+
+        const img = document.createElement('img');
+        img.src = item.imageUrl;  // Set the image URL dynamically
+        img.alt = item.name;  // Set the alt text for accessibility
+        imageSlot.appendChild(img);
+
+        gridItem.appendChild(imageSlot);
+
+        const caption = document.createElement('div');
+        caption.className = 'caption';
+        caption.textContent = item.name;  // Set the caption to the specific name
+        gridItem.appendChild(caption);
+
+        // Add click event to each item
+        gridItem.addEventListener('click', () => {
+          // Redirect to the specific page defined in the 'page' property
+          window.location.href = item.page;
+        });
+
+        gridContainer.appendChild(gridItem);
+      });
+    </script>
+  </div>
+</body>
+</html>
