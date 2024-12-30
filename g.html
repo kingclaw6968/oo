@@ -44,12 +44,13 @@
     }
     .grid-container {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(6, 1fr); /* 6 columns */
       gap: 20px;
       padding: 20px;
       max-width: 1200px;
       width: 100%;
       overflow: auto; /* Allow scroll if necessary */
+      justify-content: center; /* Center grid horizontally */
     }
     .grid-item {
       display: flex;
@@ -107,6 +108,7 @@
 </head>
 <body>
   <header><a href="index.html" style="text-decoration: none; color: #ffffff; font-size: 24px; text-align: center; width: 100%;">SKIBIDI</a></header>
+  
   <!-- Search bar section -->
   <div class="search-container">
     <input type="text" class="search-bar" id="searchBar" placeholder="Search for a game..." onkeyup="filterGames()">
@@ -119,13 +121,15 @@
       const searchBar = document.getElementById('searchBar');
       
       const items = [
-                { name: '1v1.lol', imageUrl: 'https://img.utdstc.com/icon/983/22a/98322a3b2be892eed31589906ffd949b68bcccc9a21ba562987965b5ec6bc6de:200', page: 'page1.html' },
+        { name: '1v1.lol', imageUrl: 'https://img.utdstc.com/icon/983/22a/98322a3b2be892eed31589906ffd949b68bcccc9a21ba562987965b5ec6bc6de:200', page: 'page1.html' },
         { name: 'ArtClass', imageUrl: 'https://avatars.githubusercontent.com/u/116205545?s=280&v=4', page: 'page2.html' },
+{ name: 'American Touchdown', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSt4ILZexomGwGpc34cG3GkEAh9ZFcWzqJkkA&s', page: 'page54.html' },
         { name: 'SnowRider3D', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ64SYhh05_zaEtRRSc3h70DWiDXyBCsHS6rA&s', page: 'page3.html' },
         { name: 'an avg day at a cat cafe', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFnQ5xrdtEduAESiO8L9S69X4iJNp0iEVPXw&s', page: 'page4.html' },
         { name: 'avoid the color', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSN5HNq9RHzxVxHNX8skCD25aO9-YoSKzL5WA&s', page: 'page5.html' },
         { name: 'avoid the void', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiHz8Wav-SbF7PvLslWYFGQ_AHyPFu-LAiJA&s', page: 'page6.html' },
         { name: 'bad smash 2', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmIdcoMS1Ss4a0b7BweRC6hTTdFvlrOzzWMQ&s', page: 'page7.html' },
+        { name: 'basketball slam dunk', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1AYL53n5RSMhruqodKwU1ZZGwMHVxBLamaQ&s', page: 'page53.html' },
         { name: 'bitlife', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSuaVg-nFFUMI4Ir5GABovV-zaqFWR5g_-yIw&s', page: 'page8.html' },
         { name: 'celeste classic', imageUrl: 'https://celeste.hsmusic.wiki/media/flash-art/celeste-classic.png', page: 'page9.html' },
         { name: 'Circle O', imageUrl: 'https://play-lh.googleusercontent.com/402xpuDl6zg0PqhnmVTvJqvaLbQ4ewuk2-S8BQm1l68ddapXfWSy-ngcCByKBmC7ASY', page: 'page46.html' },
@@ -171,6 +175,7 @@
 { name: 'vex 7', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRE-EZmHzIlVpGgiVVHQvEsqBfUfEbnpvb9Nw&s', page: 'page42.html' },
 { name: 'vertigolf', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRa3Zg1hQfeU6_sXY5SB9UHc6bm8swfjT7XHg&s', page: 'page43.html' },
 { name: 'world of color', imageUrl: 'https://d1yjjnpx0p53s8.cloudfront.net/styles/logo-thumbnail/s3/072012/disney_world_of_color_logo_small.jpg?itok=A7zBcDIU', page: 'page44.html' }
+        // Add more items as needed...
       ];
 
       function filterGames() {
@@ -193,25 +198,22 @@
           img.alt = item.name;  // Set the alt text for accessibility
           imageSlot.appendChild(img);
 
-          gridItem.appendChild(imageSlot);
-
           const caption = document.createElement('div');
           caption.className = 'caption';
-          caption.textContent = item.name;  // Set the caption to the specific name
+          caption.textContent = item.name;
+
+          gridItem.appendChild(imageSlot);
           gridItem.appendChild(caption);
 
-          // Add click event to each item
-          gridItem.addEventListener('click', () => {
-            // Redirect to the specific page defined in the 'page' property
+          gridItem.onclick = () => {
             window.open(item.page, '_blank');
-          });
+          };
 
           gridContainer.appendChild(gridItem);
         });
       }
 
-      // Initial render of the grid with all items
-      renderGrid(items);
+      renderGrid(items);  // Initial render of all items
     </script>
   </div>
 </body>
