@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SKIBIDI</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: #121212; /* Dark background */
+      color: #e0e0e0; /* Light text color */
+    }
+    header {
+      width: 100%;
+      background-color: #1f1f1f; /* Darker header */
+      color: #ffffff;
+      text-align: center;
+      padding: 10px 0;
+      font-size: 24px;
+      font-weight: bold;
+      border-bottom: 2px solid #333;
+    }
+    .search-container {
+      width: 100%;
+      max-width: 1200px;
+      padding: 20px;
+      text-align: center;
+    }
+    .search-bar {
+      width: 100%;
+      max-width: 300px;
+      padding: 10px;
+      margin-bottom: 20px;
+      background-color: #333;
+      color: #e0e0e0;
+      border: 1px solid #444;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      padding: 20px;
+      max-width: 1200px;
+      width: 100%;
+      overflow: auto; /* Allow scroll if necessary */
+    }
+    .grid-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: #1e1e1e; /* Slightly lighter than the body */
+      padding: 10px;
+      border: 1px solid #333; /* Subtle border */
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Soft shadow */
+      transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
+    }
+    .grid-item:hover {
+      transform: scale(1.05); /* Slightly enlarge on hover */
+      box-shadow: 0 0 15px 2px rgba(255, 255, 255, 0.5); /* White glow effect */
+    }
+    .image-slot {
+      width: 100px;
+      height: 100px;
+      background-color: #2d2d2d; /* Dark placeholder color */
+      border-radius: 8px;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      transition: transform 0.3s ease; /* Smooth transition for image slot */
+    }
+    .image-slot img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* Ensure the image fits inside the slot */
+      transition: transform 0.3s ease; /* Smooth transition for image zoom */
+    }
+    .image-slot:hover img {
+      transform: scale(1.1); /* Zoom in the image slightly */
+    }
+    .caption {
+      font-size: 16px;
+      font-weight: bold;
+      color: #e0e0e0; /* Light text for captions */
+    }
+
+    /* Hide scrollbar for Chrome, Safari, and Opera */
+    .grid-container::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* Hide scrollbar for IE, Edge, and Firefox */
+    .grid-container {
+      -ms-overflow-style: none;  /* IE and Edge */
+      scrollbar-width: none;  /* Firefox */
+    }
+  </style>
+</head>
+<body>
+  <header><a href="index.html" style="text-decoration: none; color: #ffffff; font-size: 24px; text-align: center; width: 100%;">SKIBIDI</a></header>
+  <!-- Search bar section -->
+  <div class="search-container">
+    <input type="text" class="search-bar" id="searchBar" placeholder="Search for a game..." onkeyup="filterGames()">
+  </div>
+
+  <div class="grid-container" id="gridContainer">
+    <!-- Dynamically generate a large number of items with different images and names -->
+    <script>
+      const gridContainer = document.querySelector('.grid-container');
+      const searchBar = document.getElementById('searchBar');
+      
+      const items = [
+                { name: '1v1.lol', imageUrl: 'https://img.utdstc.com/icon/983/22a/98322a3b2be892eed31589906ffd949b68bcccc9a21ba562987965b5ec6bc6de:200', page: 'page1.html' },
+        { name: 'ArtClass', imageUrl: 'https://avatars.githubusercontent.com/u/116205545?s=280&v=4', page: 'page2.html' },
+        { name: 'SnowRider3D', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ64SYhh05_zaEtRRSc3h70DWiDXyBCsHS6rA&s', page: 'page3.html' },
+        { name: 'an avg day at a cat cafe', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFnQ5xrdtEduAESiO8L9S69X4iJNp0iEVPXw&s', page: 'page4.html' },
+        { name: 'avoid the color', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSN5HNq9RHzxVxHNX8skCD25aO9-YoSKzL5WA&s', page: 'page5.html' },
+        { name: 'avoid the void', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiHz8Wav-SbF7PvLslWYFGQ_AHyPFu-LAiJA&s', page: 'page6.html' },
+        { name: 'bad smash 2', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmIdcoMS1Ss4a0b7BweRC6hTTdFvlrOzzWMQ&s', page: 'page7.html' },
+        { name: 'bitlife', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSuaVg-nFFUMI4Ir5GABovV-zaqFWR5g_-yIw&s', page: 'page8.html' },
+        { name: 'celeste classic', imageUrl: 'https://celeste.hsmusic.wiki/media/flash-art/celeste-classic.png', page: 'page9.html' },
+        { name: 'Circle O', imageUrl: 'https://play-lh.googleusercontent.com/402xpuDl6zg0PqhnmVTvJqvaLbQ4ewuk2-S8BQm1l68ddapXfWSy-ngcCByKBmC7ASY', page: 'page46.html' },
+        { name: 'cookie clicker', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8LAMx-QZh1PcM8KQ9T45nc4y2kycq14WAfg&s', page: 'page10.html' },
+        { name: 'doom', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQBhfmwnizW68_TAEx0-YwVPXN9IOMfn1J_w&s', page:'page11.html' },
+        { name: 'earn to die', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeMdnNhtoplLB2D7PBcAkfBAQvEeqBJYyjFw&s', page:'page12.html' },
+        { name: 'emulator', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFWgkqpmlXWOBVncZF3qoxQBa6bNXbZKqBRQ&s', page:'page13.html' },
+        { name: 'flocc', imageUrl: 'https://play-lh.googleusercontent.com/eqBYJeBZQjtAOsevKUEe5VvdF6bW_Qw_WIqkJcEs1bm8aqdXgL2Dc6WJKja_Y0xqsPA', page:'page14.html' },
+{ name: 'fnaf1', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5Hr71riDlA_hm8XCzaiwwCFcug4Amqr7vQA&s', page: 'page15.html' },
+{ name: 'fnaf4', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQl4VFeCemc2D--ZeEaVX4bLiDMI371xqAsrg&s', page: 'page16.html' },
+{ name: 'generic fishing game', imageUrl: 'https://img.itch.zone/aW1nLzEwNDA2MDYwLnBuZw==/original/pucgOg.png', page: 'page47.html' },
+{ name: 'getaway shootout', imageUrl: 'https://getawayshootout.wiki.gg/images/d/d7/Keyart.jpg', page: 'page45.html' },
+{ name: 'gold digger', imageUrl: 'https://img.poki-cdn.com/cdn-cgi/image/quality=78,width=314,height=314,fit=cover,f=auto/ada621ee3a066ab12be8484017fd6297.png', page: 'page17.html' },
+{ name: 'help no brake', imageUrl: 'https://external-preview.redd.it/9oUkZR2h9_2pPl_YyuOPdlIxYgQkfsDLCmCoFadAG9k.jpg?auto=webp&s=53b4fd6c6213b0248c328bcea2c4b6a3820a41e3', page: 'page18.html' },
+{ name: 'homestuck', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6MycFwv9tlb0Oa6ZSz2Co4i60fS6FEXG4Dw&s', page: 'page19.html' },
+{ name: 'jump king', imageUrl: 'https://image.api.playstation.com/vulcan/img/cfn/11307N2Y_xtSL0fWPX43hF5Sw7KGPUUP40p6tpJDMpScD_L4v8lgTAipwl03p_sxThCFutGBEtaK1XqrXuLqtgQ8Ox8hnOW5.png', page: 'page20.html' },
+{ name: 'kirby', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ55Me9ajQ3Ak_Q9sAP7V0wCIfCEwW4sIxFgw&s', page: 'page21.html' },
+{ name: 'mikutap', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlW5HduT9DBfl1wGYAoAtw9xWOCQGTmZGIwQ&s', page: 'page22.html' },
+{ name: 'minecraft', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8_oBcDya0fpJfEtcZQa63J9wCezCleN5O1w&s', page: 'page23.html' },
+{ name: 'minecraft 1.8', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRK61XkVLPifsF2CNnK0IMfpiBXcLJJn5c6XQ&s', page: 'page24.html' },
+{ name: 'mob inc', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAGQ9AdJXCMAe2I2J-w2cs48UrXFVNKGqqWQ&s', page: 'page25.html' },
+{ name: 'motox3m pool', imageUrl: 'https://img.poki-cdn.com/cdn-cgi/image/quality=78,width=314,height=314,fit=cover,f=auto/0235b530eec4f17ad60137f6b245a988.jpeg', page: 'page26.html' },
+{ name: 'my house', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdNRbA-SH5qsaonyXORjsUnH1_hQ6AoMbAmQ&s', page: 'page27.html' },
+{ name: 'N-GON', imageUrl: 'https://img.itch.zone/aW1nLzI2OTY3MDAucG5n/original/kb8XuC.png', page: 'page48.html' },
+{ name: 'portal 2d', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSG-qPrqYQskp9i0qBS4Fj1b1Y9JT3lghQ0yA&s', page: 'page28.html' },
+{ name: 'powder game 2', imageUrl: 'https://myvideogamelist-com.s3.amazonaws.com/assets/boxart/66459.png', page: 'page29.html' },
+{ name: 'retro bowl', imageUrl: 'https://img.poki-cdn.com/cdn-cgi/image/quality=78,width=314,height=314,fit=cover,f=auto/ee9ca3764ef4289a48a1ebf457ef605441ed1f35a0f2eb12707a70d609e53686.png', page: 'page30.html' },
+{ name: 'run3', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMOEhy1C6Fatj9h9RP39dt99bvnkEHfqwExw&s', page: 'page31.html' },
+{ name: 'Santy is Home', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUQl_dYQU4lHbR-ICOZ8gyPMtmHY3eLIA1fA&s', page: 'page49.html' },
+{ name: 'snake physics', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT__o_6p9YzyPgBhaOvkGeww3F3V9nVgVPnPg&s', page: 'page32.html' },
+{ name: 'slope', imageUrl: 'https://play-lh.googleusercontent.com/uJn2i9h7KxYQarC_c3K4qH6o7gLtflFnhD_dN14MNkzHJ1NeNFzCL69jpB5mT0vCoQs', page: 'page33.html' },
+{ name: 'subway surfers', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQD8bn7fpuYz317j1s9Y7wEXY2p_YVZlioC1w&s', page: 'page34.html' },
+{ name: 'supertux', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs5m-4vPdgINDR0R1GjjgD5j4so8yrCpGYXQ&s', page: 'page35.html' },
+{ name: 'temple run 2', imageUrl: 'https://img.poki-cdn.com/cdn-cgi/image/quality=78,width=314,height=314,fit=cover,f=auto/b5c8b617f65be7cc4d56dd3657590ae7.png', page: 'page36.html' },
+{ name: 'tanuki sunset', imageUrl: 'https://www.giantbomb.com/a/uploads/square_medium/0/1992/3420895-6225723399-apps.2563.14626521929622671.9f376173-7e5b-43e9-bfe9-86a35b4f55d9.3a56259a-b7f5-4b9f-bb42-5166b0e31679.jpg', page: 'page37.html' },
+{ name: 'tetris', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ87t64HmfF30GxiRmeMkjUjPQMaW8GmxjTMw&s', page: 'page38.html' },
+{ name: 'tiny fishing', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_3-qXPjLzmTc4ZVaXXuus8glmBwkXFlOweg&s', page: 'page50.html' },
+{ name: 'the n game', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkrCFPlh04ZBkQCSJYbCLJJoY3aI0bA7dwew&s', page: 'page39.html' },
+{ name: 'there is no game', imageUrl: 'https://m.media-amazon.com/images/M/MV5BYTMzZWE2MWYtYjA4ZS00NDgyLThjYzItMTdmODhjMTk5MWU4XkEyXkFqcGc@._V1_.jpg', page: 'page51.html' },
+{ name: 'Townscape', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBEKaX2JP9kb-omYuPy3zLyCtDvH7PKlJn8w&s', page: 'page52.html' },
+{ name: 'vex 5', imageUrl: 'https://gaamess.com/wp-content/uploads/2022/01/Vex-5.jpg', page: 'page40.html' },
+{ name: 'vex 6', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKdC8jHCMWtTGsOils4atajZuDdo0X6bAVow&s', page: 'page41.html' },
+{ name: 'vex 7', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRE-EZmHzIlVpGgiVVHQvEsqBfUfEbnpvb9Nw&s', page: 'page42.html' },
+{ name: 'vertigolf', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRa3Zg1hQfeU6_sXY5SB9UHc6bm8swfjT7XHg&s', page: 'page43.html' },
+{ name: 'world of color', imageUrl: 'https://d1yjjnpx0p53s8.cloudfront.net/styles/logo-thumbnail/s3/072012/disney_world_of_color_logo_small.jpg?itok=A7zBcDIU', page: 'page44.html' }
+      ];
+
+      function filterGames() {
+        const searchTerm = searchBar.value.toLowerCase();
+        const filteredItems = items.filter(item => item.name.toLowerCase().includes(searchTerm));
+        renderGrid(filteredItems);
+      }
+
+      function renderGrid(filteredItems) {
+        gridContainer.innerHTML = '';  // Clear the current grid
+        filteredItems.forEach(item => {
+          const gridItem = document.createElement('div');
+          gridItem.className = 'grid-item';
+
+          const imageSlot = document.createElement('div');
+          imageSlot.className = 'image-slot';
+
+          const img = document.createElement('img');
+          img.src = item.imageUrl;  // Set the image URL dynamically
+          img.alt = item.name;  // Set the alt text for accessibility
+          imageSlot.appendChild(img);
+
+          gridItem.appendChild(imageSlot);
+
+          const caption = document.createElement('div');
+          caption.className = 'caption';
+          caption.textContent = item.name;  // Set the caption to the specific name
+          gridItem.appendChild(caption);
+
+          // Add click event to each item
+          gridItem.addEventListener('click', () => {
+            // Redirect to the specific page defined in the 'page' property
+            window.open(item.page, '_blank');
+          });
+
+          gridContainer.appendChild(gridItem);
+        });
+      }
+
+      // Initial render of the grid with all items
+      renderGrid(items);
+    </script>
+  </div>
+</body>
+</html>
