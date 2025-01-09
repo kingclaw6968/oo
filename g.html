@@ -4,116 +4,272 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SKIBIDI</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      background-color: #121212; /* Dark background */
-      color: #e0e0e0; /* Light text color */
-    }
-    header {
-      width: 100%;
-      background-color: #1f1f1f; /* Darker header */
-      color: #ffffff;
-      text-align: center;
-      padding: 10px 0;
-      font-size: 24px;
-      font-weight: bold;
-      border-bottom: 2px solid #333;
-    }
-    .search-container {
-      width: 100%;
-      max-width: 1200px;
-      padding: 20px;
-      text-align: center;
-    }
-    .search-bar {
-      width: 100%;
-      max-width: 300px;
-      padding: 10px;
-      margin-bottom: 20px;
-      background-color: #333;
-      color: #e0e0e0;
-      border: 1px solid #444;
-      border-radius: 8px;
-      font-size: 16px;
-    }
-    .grid-container {
-      display: grid;
-      grid-template-columns: repeat(6, 1fr); /* 6 columns */
-      gap: 20px;
-      padding: 20px;
-      max-width: 1200px;
-      width: 100%;
-      overflow: auto; /* Allow scroll if necessary */
-      justify-content: center; /* Center grid horizontally */
-    }
-    .grid-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      background-color: #1e1e1e; /* Slightly lighter than the body */
-      padding: 10px;
-      border: 1px solid #333; /* Subtle border */
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Soft shadow */
-      transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
-    }
-    .grid-item:hover {
-      transform: scale(1.05); /* Slightly enlarge on hover */
-      box-shadow: 0 0 15px 2px rgba(255, 255, 255, 0.5); /* White glow effect */
-    }
-    .image-slot {
-      width: 100px;
-      height: 100px;
-      background-color: #2d2d2d; /* Dark placeholder color */
-      border-radius: 8px;
-      margin-bottom: 10px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
-      transition: transform 0.3s ease; /* Smooth transition for image slot */
-    }
-    .image-slot img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover; /* Ensure the image fits inside the slot */
-      transition: transform 0.3s ease; /* Smooth transition for image zoom */
-    }
-    .image-slot:hover img {
-      transform: scale(1.1); /* Zoom in the image slightly */
-    }
-    .caption {
-      font-size: 16px;
-      font-weight: bold;
-      color: #e0e0e0; /* Light text for captions */
-    }
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- FontAwesome link for the gear icon -->
+    <style>
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+}
 
-    /* Hide scrollbar for Chrome, Safari, and Opera */
-    .grid-container::-webkit-scrollbar {
-      display: none;
-    }
+/* Header styles */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    padding: 10px 20px;
+    color: white;
+}
 
-    /* Hide scrollbar for IE, Edge, and Firefox */
-    .grid-container {
-      -ms-overflow-style: none;  /* IE and Edge */
-      scrollbar-width: none;  /* Firefox */
-    }
+/* Logo container (Skibidi text) styling */
+.logo-container h1 {
+    margin: 0;
+    font-size: 2rem;
+    color: white;
+    text-align: left;
+    margin-left: 50px; /* Move Skibidi 50px from the edge */
+}
+
+/* Navigation container (for the Two Players and Games text) */
+.nav-container {
+    display: flex;
+    align-items: center;
+}
+
+/* Styling for the navigation links */
+.nav-container a {
+    margin-right: 50px; /* Move the text 50px from the edge */
+    font-size: 1.2rem;
+    color: white;
+    text-decoration: none;
+}
+
+.nav-container a:hover {
+    color: #f08a5d; /* Change color on hover */
+}
+
+/* Gear button styling */
+.gear-button {
+    background-color: transparent;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    font-size: 24px;
+    cursor: pointer;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.gear-button:hover {
+    background-color: #444;
+}
+
+/* Position the gear button at the bottom left */
+.gear-container {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 1000; /* Ensures the button stays on top */
+}
+
+#file-input {
+    display: none;
+}
+
+body {
+    transition: background 0.5s ease-in-out;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    margin: 0;
+}
+
+body {
+    background-image: url('https://static.vecteezy.com/system/resources/previews/007/233/624/non_2x/brick-black-wall-texture-background-dark-brickwork-pattern-block-stone-structure-backdrop-dark-brick-wall-realistic-template-abstract-modern-wallpaper-design-illustration-vector.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #121212; 
+    color: #e0e0e0; 
+}
+
+header {
+    width: 100%;
+    background-color: #1f1f1f; 
+    color: #ffffff;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 24px;
+    font-weight: bold;
+    border-bottom: 2px solid #333;
+}
+
+.search-container {
+    width: 100%;
+    max-width: 1200px;
+    padding: 20px;
+    text-align: center;
+}
+
+.search-bar {
+    width: 100%;
+    max-width: 300px;
+    padding: 10px;
+    margin-bottom: 20px;
+    background-color: #333;
+    color: #e0e0e0;
+    border: 1px solid #444;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr); 
+    gap: 20px;
+    padding: 20px;
+    max-width: 1200px;
+    width: 100%;
+    overflow: auto; 
+    justify-content: center; 
+}
+
+.grid-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: transparent; 
+    padding: 10px;
+    border: 1px solid #333; 
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); 
+    transition: transform 0.3s ease, box-shadow 0.3s ease; 
+}
+
+.grid-item:hover {
+    transform: scale(1.05); 
+    box-shadow: 0 0 15px 2px rgba(255, 99, 255, 0.5); 
+}
+
+.image-slot {
+    width: 100px;
+    height: 100px;
+    background-color: transparent; 
+    border-radius: 8px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    transition: transform 0.3s ease; 
+}
+
+.image-slot img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    transition: transform 0.3s ease; 
+}
+
+.image-slot:hover img {
+    transform: scale(1.1); 
+}
+
+.caption {
+    font-size: 16px;
+    font-weight: bold;
+    color: #e0e0e0; 
+}
+
+.grid-container::-webkit-scrollbar {
+    display: none;
+}
+
+.grid-container {
+    -ms-overflow-style: none;
+    scrollbar-width: none; 
+}
+
   </style>
 </head>
 <body>
-  <header><a href="index.html" style="text-decoration: none; color: #ffffff; font-size: 24px; text-align: center; width: 100%;">SKIBIDI</a></header>
+  <header>
+        <div class="logo-container">
+            <h1>Skibidi</h1>  <!-- Skibidi text moved 50px from the edge -->
+        </div>
+        <div class="nav-container">
+<a href="g.html">Games</a>
+            <a href="2p.html">Two Players</a>  
+<a href="a.html">Apps</a>
+        </div>
+    </header>
   
-  <!-- Search bar section -->
   <div class="search-container">
     <input type="text" class="search-bar" id="searchBar" placeholder="Search for a game..." onkeyup="filterGames()">
   </div>
+   <div class="gear-container">
+        <button id="gear-button" class="gear-button">
+            <i class="fas fa-cog"></i> <!-- FontAwesome gear icon -->
+        </button>
+        <input type="file" id="file-input" accept="image/*" style="display: none;">
+    </div>
 
+    <script>
+// Function to change the background image and save it to localStorage
+document.getElementById('file-input').addEventListener('change', function (event) {
+  var file = event.target.files[0];
+  if (file) {
+    var reader = new FileReader();
+    
+    reader.onload = function (e) {
+      // Set the new background image
+      document.body.style.backgroundImage = 'url(' + e.target.result + ')';
+      // Store the background image in localStorage
+      localStorage.setItem('backgroundImage', e.target.result);
+    };
+    
+    reader.readAsDataURL(file);
+  }
+});
+
+// Check if a background image is stored in localStorage when the page loads
+window.addEventListener('load', function () {
+  const storedBackground = localStorage.getItem('backgroundImage');
+  if (storedBackground) {
+    document.body.style.backgroundImage = 'url(' + storedBackground + ')';
+  }
+});
+	document.getElementById('gear-button').addEventListener('click', function () {
+            document.getElementById('file-input').click();
+        });
+
+        document.getElementById('file-input').addEventListener('change', function (event) {
+            var file = event.target.files[0];
+            if (file) {
+                var reader = new FileReader();
+                
+                reader.onload = function (e) {
+                    document.body.style.backgroundImage = 'url(' + e.target.result + ')';
+                };
+                
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
   <div class="grid-container" id="gridContainer">
     <!-- Dynamically generate a large number of items with different images and names -->
     <script>
@@ -121,19 +277,16 @@
       const searchBar = document.getElementById('searchBar');
       
       const items = [
-        { name: '1v1.lol', imageUrl: 'https://img.utdstc.com/icon/983/22a/98322a3b2be892eed31589906ffd949b68bcccc9a21ba562987965b5ec6bc6de:200', page: 'page1.html' },
-        { name: 'ArtClass', imageUrl: 'https://avatars.githubusercontent.com/u/116205545?s=280&v=4', page: 'page2.html' },
-{ name: 'American Touchdown', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSt4ILZexomGwGpc34cG3GkEAh9ZFcWzqJkkA&s', page: 'page54.html' },
         { name: 'SnowRider3D', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ64SYhh05_zaEtRRSc3h70DWiDXyBCsHS6rA&s', page: 'page3.html' },
         { name: 'an avg day at a cat cafe', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFnQ5xrdtEduAESiO8L9S69X4iJNp0iEVPXw&s', page: 'page4.html' },
         { name: 'avoid the color', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSN5HNq9RHzxVxHNX8skCD25aO9-YoSKzL5WA&s', page: 'page5.html' },
         { name: 'avoid the void', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiHz8Wav-SbF7PvLslWYFGQ_AHyPFu-LAiJA&s', page: 'page6.html' },
         { name: 'bad smash 2', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmIdcoMS1Ss4a0b7BweRC6hTTdFvlrOzzWMQ&s', page: 'page7.html' },
-        { name: 'basketball slam dunk', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1AYL53n5RSMhruqodKwU1ZZGwMHVxBLamaQ&s', page: 'page53.html' },
         { name: 'bitlife', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSuaVg-nFFUMI4Ir5GABovV-zaqFWR5g_-yIw&s', page: 'page8.html' },
         { name: 'celeste classic', imageUrl: 'https://celeste.hsmusic.wiki/media/flash-art/celeste-classic.png', page: 'page9.html' },
         { name: 'Circle O', imageUrl: 'https://play-lh.googleusercontent.com/402xpuDl6zg0PqhnmVTvJqvaLbQ4ewuk2-S8BQm1l68ddapXfWSy-ngcCByKBmC7ASY', page: 'page46.html' },
         { name: 'cookie clicker', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8LAMx-QZh1PcM8KQ9T45nc4y2kycq14WAfg&s', page: 'page10.html' },
+{ name: 'Crossy Road', imageUrl: 'https://cdn.jim-nielsen.com/ios/512/crossy-road-endless-arcade-2014-12-02.png', page: 'page71.html' },
         { name: 'doom', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQBhfmwnizW68_TAEx0-YwVPXN9IOMfn1J_w&s', page:'page11.html' },
         { name: 'earn to die', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeMdnNhtoplLB2D7PBcAkfBAQvEeqBJYyjFw&s', page:'page12.html' },
         { name: 'emulator', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFWgkqpmlXWOBVncZF3qoxQBa6bNXbZKqBRQ&s', page:'page13.html' },
@@ -142,35 +295,32 @@
 { name: 'fnaf1', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5Hr71riDlA_hm8XCzaiwwCFcug4Amqr7vQA&s', page: 'page15.html' },
 { name: 'fnaf4', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQl4VFeCemc2D--ZeEaVX4bLiDMI371xqAsrg&s', page: 'page16.html' },
 { name: 'generic fishing game', imageUrl: 'https://img.itch.zone/aW1nLzEwNDA2MDYwLnBuZw==/original/pucgOg.png', page: 'page47.html' },
-{ name: 'getaway shootout', imageUrl: 'https://getawayshootout.wiki.gg/images/d/d7/Keyart.jpg', page: 'page45.html' },
 { name: 'gold digger', imageUrl: 'https://img.poki-cdn.com/cdn-cgi/image/quality=78,width=314,height=314,fit=cover,f=auto/ada621ee3a066ab12be8484017fd6297.png', page: 'page17.html' },
 { name: 'help no brake', imageUrl: 'https://external-preview.redd.it/9oUkZR2h9_2pPl_YyuOPdlIxYgQkfsDLCmCoFadAG9k.jpg?auto=webp&s=53b4fd6c6213b0248c328bcea2c4b6a3820a41e3', page: 'page18.html' },
-{ name: 'house of hazards', imageUrl: 'https://houseofhazards.com/upload/imgs/house-of-hazards.jpg', page: 'page56.html' },
-{ name: 'homestuck', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6MycFwv9tlb0Oa6ZSz2Co4i60fS6FEXG4Dw&s', page: 'page19.html' },
 { name: 'iron snout', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGX3Kc85UaaHp_9FmEdZDZRPBSdd2Dmyp4Qw&s', page: 'page57.html' },
 { name: 'jump king', imageUrl: 'https://image.api.playstation.com/vulcan/img/cfn/11307N2Y_xtSL0fWPX43hF5Sw7KGPUUP40p6tpJDMpScD_L4v8lgTAipwl03p_sxThCFutGBEtaK1XqrXuLqtgQ8Ox8hnOW5.png', page: 'page20.html' },
 { name: 'jumping shell', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRw0L-2ITlnwiaWDBUQPy4tu3pFlDITCezk-w&s', page: 'page55.html' },
 { name: 'kirby', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ55Me9ajQ3Ak_Q9sAP7V0wCIfCEwW4sIxFgw&s', page: 'page21.html' },
 { name: 'krunker', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTq0ZNEc_5ZwEC5vHuCI97Cu2m8Xi4OmhUmXA&s', page: 'page60.html' },
+{ name: 'Little Alchamy', imageUrl: 'https://play-lh.googleusercontent.com/-NQ2QLAOaafy7iHAJcrdEFk-tyVicnbwy6iLehml8K0Higi60sSVn0829bcyi1lOUw', page: 'page69.html' },
 { name: 'mikutap', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlW5HduT9DBfl1wGYAoAtw9xWOCQGTmZGIwQ&s', page: 'page22.html' },
-{ name: 'minecraft', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8_oBcDya0fpJfEtcZQa63J9wCezCleN5O1w&s', page: 'page23.html' },
-{ name: 'minecraft 1.8', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRK61XkVLPifsF2CNnK0IMfpiBXcLJJn5c6XQ&s', page: 'page24.html' },
 { name: 'mob inc', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAGQ9AdJXCMAe2I2J-w2cs48UrXFVNKGqqWQ&s', page: 'page25.html' },
 { name: 'motox3m pool', imageUrl: 'https://img.poki-cdn.com/cdn-cgi/image/quality=78,width=314,height=314,fit=cover,f=auto/0235b530eec4f17ad60137f6b245a988.jpeg', page: 'page26.html' },
 { name: 'my house', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdNRbA-SH5qsaonyXORjsUnH1_hQ6AoMbAmQ&s', page: 'page27.html' },
 { name: 'N-GON', imageUrl: 'https://img.itch.zone/aW1nLzI2OTY3MDAucG5n/original/kb8XuC.png', page: 'page48.html' },
 { name: 'portal 2d', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSG-qPrqYQskp9i0qBS4Fj1b1Y9JT3lghQ0yA&s', page: 'page28.html' },
 { name: 'powder game 2', imageUrl: 'https://myvideogamelist-com.s3.amazonaws.com/assets/boxart/66459.png', page: 'page29.html' },
+{ name: 'Raccooon Retail', imageUrl: 'https://play-lh.googleusercontent.com/zI8P-Gej0l8WK9_rRrVJuHQfZqA97ncD1RCN8qdLbmwl0uxPI8o5JLBsnJz5hxLKTYE', page: 'page70.html' },
 { name: 'retro bowl', imageUrl: 'https://img.poki-cdn.com/cdn-cgi/image/quality=78,width=314,height=314,fit=cover,f=auto/ee9ca3764ef4289a48a1ebf457ef605441ed1f35a0f2eb12707a70d609e53686.png', page: 'page30.html' },
 { name: 'run3', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMOEhy1C6Fatj9h9RP39dt99bvnkEHfqwExw&s', page: 'page31.html' },
 { name: 'Santy is Home', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUQl_dYQU4lHbR-ICOZ8gyPMtmHY3eLIA1fA&s', page: 'page49.html' },
 { name: 'snake physics', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT__o_6p9YzyPgBhaOvkGeww3F3V9nVgVPnPg&s', page: 'page32.html' },
 { name: 'slope', imageUrl: 'https://play-lh.googleusercontent.com/uJn2i9h7KxYQarC_c3K4qH6o7gLtflFnhD_dN14MNkzHJ1NeNFzCL69jpB5mT0vCoQs', page: 'page33.html' },
-{ name: 'smash karts', imageUrl: 'https://yt3.googleusercontent.com/f4e3X0TDQ6edrwk29w6pBgxLdTnNUvZdBkDGDO0zqlWXY6NGVjdDvlTKhyg4apwjykBu-hSGuw=s900-c-k-c0x00ffffff-no-rj', page: 'page58.html' },
 { name: 'subway surfers', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQD8bn7fpuYz317j1s9Y7wEXY2p_YVZlioC1w&s', page: 'page34.html' },
 { name: 'supertux', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs5m-4vPdgINDR0R1GjjgD5j4so8yrCpGYXQ&s', page: 'page35.html' },
+{ name: 'soundboard', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhPbMDLSp5ebGjAcMXHh3OmtmhniAIQtK3_g&s', page: 'page65.html' },
 { name: 'temple run 2', imageUrl: 'https://img.poki-cdn.com/cdn-cgi/image/quality=78,width=314,height=314,fit=cover,f=auto/b5c8b617f65be7cc4d56dd3657590ae7.png', page: 'page36.html' },
-{ name: 'tanuki sunset', imageUrl: 'https://www.giantbomb.com/a/uploads/square_medium/0/1992/3420895-6225723399-apps.2563.14626521929622671.9f376173-7e5b-43e9-bfe9-86a35b4f55d9.3a56259a-b7f5-4b9f-bb42-5166b0e31679.jpg', page: 'page37.html' },
+{ name: 'tanuki sunset', imageUrl: 'https://www.nintendo.com/eu/media/images/11_square_images/games_18/nintendo_switch_download_software/1x1_NSwitchDS_TanukiSunset_image500w.jpg', page: 'page37.html' },
 { name: 'tetris', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ87t64HmfF30GxiRmeMkjUjPQMaW8GmxjTMw&s', page: 'page38.html' },
 { name: 'tiny fishing', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_3-qXPjLzmTc4ZVaXXuus8glmBwkXFlOweg&s', page: 'page50.html' },
 { name: 'the n game', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkrCFPlh04ZBkQCSJYbCLJJoY3aI0bA7dwew&s', page: 'page39.html' },
@@ -181,7 +331,7 @@
 { name: 'vex 7', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRE-EZmHzIlVpGgiVVHQvEsqBfUfEbnpvb9Nw&s', page: 'page42.html' },
 { name: 'vertigolf', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRa3Zg1hQfeU6_sXY5SB9UHc6bm8swfjT7XHg&s', page: 'page43.html' },
 { name: 'world of color', imageUrl: 'https://d1yjjnpx0p53s8.cloudfront.net/styles/logo-thumbnail/s3/072012/disney_world_of_color_logo_small.jpg?itok=A7zBcDIU', page: 'page44.html' }
-        // Add more items as needed...
+
       ];
 
       function filterGames() {
@@ -191,7 +341,7 @@
       }
 
       function renderGrid(filteredItems) {
-        gridContainer.innerHTML = '';  // Clear the current grid
+        gridContainer.innerHTML = '';
         filteredItems.forEach(item => {
           const gridItem = document.createElement('div');
           gridItem.className = 'grid-item';
@@ -200,8 +350,8 @@
           imageSlot.className = 'image-slot';
 
           const img = document.createElement('img');
-          img.src = item.imageUrl;  // Set the image URL dynamically
-          img.alt = item.name;  // Set the alt text for accessibility
+          img.src = item.imageUrl;  
+          img.alt = item.name;  
           imageSlot.appendChild(img);
 
           const caption = document.createElement('div');
@@ -219,7 +369,7 @@
         });
       }
 
-      renderGrid(items);  // Initial render of all items
+      renderGrid(items);  
     </script>
   </div>
 </body>
