@@ -209,7 +209,7 @@ header {
 <body>
   <header>
         <div class="logo-container">
-            <h1>Skibidi</h1>  <!-- Skibidi text moved 50px from the edge -->
+            <h1 id="logo-text">SKIBIDI</h1>  <!-- Skibidi text moved 50px from the edge -->
         </div>
         <div class="nav-container">
 <a href="g.html">Games</a>
@@ -229,6 +229,11 @@ header {
     </div>
 
     <script>
+document.getElementById('logo-text').addEventListener('click', function () {
+localStorage.clear(); // Clear all items from localStorage
+alert('LocalStorage cleared!'); // Optional: Add an alert for user feedback
+location.reload(); // Reload the page to reset the background
+});
 // Function to change the background image and save it to localStorage
 document.getElementById('file-input').addEventListener('change', function (event) {
   var file = event.target.files[0];
